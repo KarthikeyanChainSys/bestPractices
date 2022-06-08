@@ -1,0 +1,144 @@
+Q1. What is an interface?
+		* The interface in Java is a mechanism to achieve abstraction.
+		* An interface in Java is a contract of a class. 
+		* It may have static, constants, abstract methods, and default methods.
+		* It is also used for multiple implementation in Java (Java does not support multiple inheritance).
+		* Interfaces are also used as marker interface. 
+			
+Q2. Why interfaces are called as contract?
+		* Interfaces are contracts between implementers and consumers.
+		* Consumers: Programmers using a class that is implementing a interface.
+		* The interface specifies the signature of methods.
+			1. But not the semantics.
+			2. Missing Class invariants, pre and post conditions etc., 
+			Example: LayeredLibrary, IRepository, Producer-consumer, IBuffer 
+			3. The interface IRepository defines an contract between the upper layers (GUI etc..) 
+			and the lower layers (data access layer like database, file, etc.,) in the application.
+		* A contract is a promise.
+		* A class that implement an interface makes a promise, that it will realize(overriding) the abstract methods of the interface.
+		* The user of a class, to know the list of services provided by objects of the class, can check all the interfaces implemented by the class.
+			
+Q3. What are null interfaces?
+		* It is an empty interface (no field or methods).
+		* Examples of null interface are java.io.Serializable, java.lang.Cloneable and java.rmi.Remote interface.
+
+Q4. What are marker interface?
+		* Marker interfaces are very special interfaces, objects of classes that implement these interfaces are treated in a special way by the JVM. 
+		* Serializable interface is a classic example for marker interface.
+		* When any object that implements java.io.Serializable, the JVM knows that it is supposed to treat it in a special way.
+		* Another  example: javax.servlet.Servlet(marker but not a null interface)
+		* All null interfaces are markers.
+		* But all markers are not null interfaces.
+		
+Q5. Give some examples for marker interfaces?
+		* Serializable interface : Serializable interface is present in java.io package. ...
+		* Cloneable interface : Cloneable interface is present in java.lang package. ...
+		* Remote interface - Remote interface is present in java.rmi package
+		Example1:
+			- We have a class with the name Student which implements the marking interface Cloneable.
+			- In the main method we are trying to create an object of the Student class(firstObject), and clone it by using the clone() method(secondObject).
+			The class Student has two instance variables name, and age.
+			If in the firstObject value for name is "Elonmusk", and value for age is 30 then the cloned object(secondObject) 
+		will also have the same values for name, and age
+		
+Q6. What is default method in interfaces?
+		* Java 8 allows default methods to be added to Interfaces 
+		
+Q7. Differences between interface and abstract class?
+		Interfaces:
+			- Has no concrete method (exception default methods)
+			- Has no constructors
+			- A class can implement multiple interfaces
+			- Implementer class is instantiated, interface is not instantiated
+		Abstract Class:
+			- Has concrete method
+			- Has constructors
+			- extend from one base class (or) one abstract class
+			- child class is instantiated and then parent class is also instantiated
+			
+Q8. Should abstract classes have abstract methods?
+		* Abstract class may or may not include abstract methods. 
+		* It is not compulsory to have abstract method in an abstract class.
+	
+Q9. Is it possible to create objects for abstract classes?
+		* We cannot create objects of an abstract class. 
+		* To implement features of an abstract class, we inherit subclasses from it and create objects of the subclass. 
+		* A subclass must override all abstract methods of an abstract class. 
+		* When an object is created for sub class, first an object for the parent class is created. 
+		* The reference of the parent Object is available to the child through the super reference.
+		* By creating Objects for the sub class object for the abstract class is also created.
+		
+Q10. Do abstract classes have constructors?
+		Yes
+		
+Q11. If it is not possible to create object for an abstract class, then why do they have constructors?
+		* We cannot create an object for an abstract class directly.
+		* We create an object for the sub class which is concrete.
+		* The constructor of the abstract class is invoked, Before running the constructor of the sub class.
+		* Hence we can have a constructor in the abstract classes.
+		
+Q12. When to use interfaces?
+		* Interfaces are used as abstractions of the implementing classes.
+		* Interfaces are used as contracts, and also as markers
+		* Interface are also used for achieving multiple implementations
+		* specify the behaviour of a particular data type, but not concerned about who implements its behaviour.
+		
+Q13. When to use abstract classes?
+		* If you want to provide a common, implemented functionality among all the implementations of the interface. 
+		* Abstract classes will allow you to partially implement your class.
+		
+Q14. Can a class have only private constructors?
+		Yes
+		Check ScoreBoard.java
+		
+Q15. How to create objects for classes with private constructors?
+		* With the help of factory methods
+		* A factory method is a static method that creates a new object and returns it.
+			- Refer ScoreBoard.java createObject() method.
+			- private constructors cannot be called from outside the class but another method from within the same class.
+			- The factory method is implemented in the class that has the private constructors.
+			- So the factory method can call the private constructors.
+			- To call the factory method from outside the class without an object reference the factory method must be static.
+			
+Q16. What is de-coupling?
+		* decoupling allows the separation of object interaction from classes and inheritance into distinct layers of 
+	abstraction used to polymorphic-ally decouple the encapsulation. 
+		* A decoupled architecture allows the front-end and back-end developers to work independently. 
+		* Since development is carried out in parallel, it reduces the overall project time
+
+Q17. What is cohesiveness between objects?
+		* cohesion refers to the degree to which the elements inside a module belong together. 
+		* In one sense, it is a measure of the strength of relationship between the methods and 
+	data of a class and some unifying purpose or concept served by that class. 
+		* In another sense, it is a measure of the strength of relationship between the class's methods and data themselves.
+		(https://www.infoworld.com/article/2949579/design-for-change-coupling-and-cohesion-in-object-oriented-systems.html) 
+		* Cohesion denotes the level of intra-dependency amongst the elements of a software module. 
+		* In other words, Cohesion is a measure of the degree to which the responsibilities of a single module or 
+	a component form a meaningful unit.
+		* In decouple Car.java the Car is cohesive with different types of Engines, and Wheels. 
+		* Car Objects cam work with any type of engine, and any type of wheel
+		* The Car is not dependent on a particular Engine or Wheels
+	
+	Difference between high cohesion and low cohesion:
+		High cohesion:
+			- High cohesion is when you have a class that does a well-defined job. High cohesion gives us better-maintaining facility.
+		Low cohesion:
+			- Low cohesion is when a class does a lot of jobs that don't have much in common.
+			- Low cohesion results in monolithic classes that are difficult to maintain, understand and reduce re-usability
+
+Q18. Explain "has-a" and "is-a" relationship between objects with examples?
+	Car has-a Engine :
+		- Car and Engine are two different classes 
+		- Objects of type Engine are members of class 
+		- Car Car class uses Engine Object for its requirements
+		- Engine is a part of car
+		
+	Car is-a Vehicle :
+		- Vehicle is a parent class. Car inherits from Vehicle
+		
+Q19. What do you mean by Single Responsibility Principle?
+		The Single Responsibility Principle (SRP) is the concept that any single object in object-oriented programming (OOP) 
+	should be made for one specific function. 
+	
+Q20. What is Dependency Injection / Inversion Of Control (DI / IOC)?
+		Refer Decoupled package Car.java
